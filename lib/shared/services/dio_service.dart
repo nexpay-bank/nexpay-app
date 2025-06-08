@@ -1,20 +1,20 @@
+// shared/services/dio_service.dart
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioService {
   static Dio createDio() {
-    final dio = Dio(
+    return Dio(
       BaseOptions(
-        baseUrl: 'https://api.example.com/',
+        baseUrl: dotenv.env['API_BASE_URL'] ?? '',
         connectTimeout: const Duration(seconds: 5),
         receiveTimeout: const Duration(seconds: 5),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'x-api-key': dotenv.env['API_KEY'] ?? '',
         },
       ),
-    );
-
-    dio.interceptors.add(LogInterceptor(responseBody: true));
-    return dio;
+    )..interceptors.add(LogInterceptor(responseBody: true));
   }
 }

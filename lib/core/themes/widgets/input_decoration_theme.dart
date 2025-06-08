@@ -1,31 +1,29 @@
 // lib/core/themes/input_decoration_theme.dart
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nexpay/core/constants/colors.dart';
 
 class TInputDecorationTheme {
   static InputDecorationTheme getTheme(AppColors colors) {
     return InputDecorationTheme(
       filled: true,
-      fillColor: colors.background,
-      hintStyle: TextStyle(
-        color: colors.onBackground,
-        fontFamily: 'Outfit',
-        fontSize: 14,
-      ),
-      labelStyle: TextStyle(
+      fillColor: colors.onBackground.withValues(alpha: 0.1),
+      hintStyle: GoogleFonts.manrope(color: colors.onBackground, fontSize: 14),
+      labelStyle: GoogleFonts.manrope(
         color: colors.onSurface,
-        fontFamily: 'Outfit',
         fontWeight: FontWeight.w500,
       ),
-      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(64),
         borderSide: BorderSide(color: colors.primary),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(64),
-        borderSide: BorderSide(color: colors.primary),
+        borderSide: BorderSide(
+          color: colors.onBackground.withValues(alpha: 0.1),
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(64),

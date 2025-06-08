@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexpay/core/constants/colors.dart';
+import 'package:nexpay/core/themes/widgets/text_theme.dart';
 
 class TTextButtonTheme {
   static TextButtonThemeData getTheme(AppColors colors) {
@@ -13,11 +14,7 @@ class TTextButtonTheme {
           const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         ),
         textStyle: WidgetStateProperty.all(
-          TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: colors.primary,
-          ),
+          TTextTheme.getTextTheme(colors).bodyLarge,
         ),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(64)),

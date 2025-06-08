@@ -1,14 +1,19 @@
-import 'package:nexpay/shared/services/isar/user_model.dart';
 import 'package:isar/isar.dart';
-// import 'package:nexpay/shared/services/isar/user_model.dart';
+import 'package:nexpay/data/models/auth_token.dart';
 import 'package:path_provider/path_provider.dart';
 
-// import 'package:nexpay/features/user/data/models/user_model.dart';
 class IsarService {
-  static late Isar isar;
+  late final Isar _isar;
 
-  static Future<void> init() async {
+  Isar get isar => _isar;
+
+  Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
-    isar = await Isar.open([UserSchema], directory: dir.path);
+    _isar = await Isar.open([AuthTokenSchema], directory: dir.path);
+  }
+
+  Future<bool> isLoggedIn() async {
+    final user = await _isar.authTokens.where().findFirst();
+    return user?.token != null;
   }
 }

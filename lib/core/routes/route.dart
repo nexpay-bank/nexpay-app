@@ -4,6 +4,7 @@ import 'package:nexpay/features/auth/presentation/pages/login_page.dart';
 import 'package:nexpay/features/auth/presentation/pages/register_page.dart';
 import 'package:nexpay/features/navigation/pages/navigation_page.dart';
 import 'package:nexpay/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:nexpay/features/transfer/presentation/pages/transfer_page.dart';
 
 class AppRoute {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -18,6 +19,8 @@ class AppRoute {
         return _materialPageRoute(const NavigationPage());
       case RouteName.onboarding:
         return _materialPageRoute(const OnboardingPage());
+      case RouteName.transfer:
+        return _materialPageRoute(const TransferPage());
       default:
         return _materialPageRoute(const OnboardingPage());
     }

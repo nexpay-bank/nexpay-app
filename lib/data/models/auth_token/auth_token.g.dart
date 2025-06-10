@@ -21,6 +21,11 @@ const AuthTokenSchema = CollectionSchema(
       id: 0,
       name: r'token',
       type: IsarType.string,
+    ),
+    r'username': PropertySchema(
+      id: 1,
+      name: r'username',
+      type: IsarType.string,
     )
   },
   estimateSize: _authTokenEstimateSize,
@@ -44,6 +49,7 @@ int _authTokenEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.token.length * 3;
+  bytesCount += 3 + object.username.length * 3;
   return bytesCount;
 }
 
@@ -54,6 +60,7 @@ void _authTokenSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.token);
+  writer.writeString(offsets[1], object.username);
 }
 
 AuthToken _authTokenDeserialize(
@@ -65,6 +72,7 @@ AuthToken _authTokenDeserialize(
   final object = AuthToken();
   object.id = id;
   object.token = reader.readString(offsets[0]);
+  object.username = reader.readString(offsets[1]);
   return object;
 }
 
@@ -76,6 +84,8 @@ P _authTokenDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readString(offset)) as P;
+    case 1:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -355,6 +365,137 @@ extension AuthTokenQueryFilter
       ));
     });
   }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'username',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'username',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'username',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition> usernameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'username',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterFilterCondition>
+      usernameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'username',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension AuthTokenQueryObject
@@ -373,6 +514,18 @@ extension AuthTokenQuerySortBy on QueryBuilder<AuthToken, AuthToken, QSortBy> {
   QueryBuilder<AuthToken, AuthToken, QAfterSortBy> sortByTokenDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'token', Sort.desc);
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterSortBy> sortByUsername() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'username', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterSortBy> sortByUsernameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'username', Sort.desc);
     });
   }
 }
@@ -402,6 +555,18 @@ extension AuthTokenQuerySortThenBy
       return query.addSortBy(r'token', Sort.desc);
     });
   }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterSortBy> thenByUsername() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'username', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QAfterSortBy> thenByUsernameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'username', Sort.desc);
+    });
+  }
 }
 
 extension AuthTokenQueryWhereDistinct
@@ -410,6 +575,13 @@ extension AuthTokenQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'token', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<AuthToken, AuthToken, QDistinct> distinctByUsername(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'username', caseSensitive: caseSensitive);
     });
   }
 }
@@ -425,6 +597,12 @@ extension AuthTokenQueryProperty
   QueryBuilder<AuthToken, String, QQueryOperations> tokenProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'token');
+    });
+  }
+
+  QueryBuilder<AuthToken, String, QQueryOperations> usernameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'username');
     });
   }
 }

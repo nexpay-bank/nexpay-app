@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:nexpay/features/card/presentation/pages/card_page.dart';
 import 'package:nexpay/features/home/presentation/pages/home_page.dart';
 import 'package:nexpay/features/navigation/cubit/navigation_cubit.dart';
 import 'package:nexpay/features/profile/presentation/pages/profile_page.dart';
+import 'package:nexpay/features/scanner/presentation/pages/scanner_page.dart';
 import 'package:nexpay/features/statistic/presentation/pages/statistic_page.dart';
 
 class NavigationPage extends StatelessWidget {
@@ -26,14 +28,22 @@ class NavigationPage extends StatelessWidget {
           extendBody: true,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Container(
-            width: 70,
-            height: 70,
-            decoration: BoxDecoration(
-              color: context.colors.primary,
-              borderRadius: BorderRadius.circular(64),
+          floatingActionButton: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => const ScannerPage()),
+              );
+            },
+            child: Container(
+              width: 70,
+              height: 70,
+              decoration: BoxDecoration(
+                color: context.colors.primary,
+                borderRadius: BorderRadius.circular(64),
+              ),
+              child: Icon(Iconsax.scan_copy, size: 32, color: Colors.black),
             ),
-            child: Icon(Iconsax.scan_copy, size: 32, color: Colors.black),
           ),
           bottomNavigationBar: BottomAppBar(
             shape: CircularNotchedRectangle(),

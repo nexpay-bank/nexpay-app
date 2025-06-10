@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:nexpay/core/themes/theme_extensions.dart';
 
 class CardWidget extends StatelessWidget {
-  const CardWidget({super.key});
-
+  const CardWidget({
+    super.key,
+    required this.cardHolder,
+    required this.balance,
+    required this.id,
+  });
+  final String cardHolder;
+  final double balance;
+  final int id;
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16),
         padding: EdgeInsets.all(32),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -20,7 +28,7 @@ class CardWidget extends StatelessWidget {
               child: Image.asset(
                 'assets/images/logo.png',
                 fit: BoxFit.cover,
-                opacity: AlwaysStoppedAnimation(0.1),
+                opacity: AlwaysStoppedAnimation(0.4),
               ),
             ),
             Positioned.fill(
@@ -42,13 +50,14 @@ class CardWidget extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    '•••• •••• •••• 3014',
+                    '$id',
+                    // '•••• •••• •••• $id',
                     style: context.textTheme.bodyMedium!.copyWith(
                       color: context.colors.background,
                     ),
                   ),
                   Text(
-                    '\$317,286.00',
+                    '\$$balance',
                     style: context.textTheme.displayMedium!.copyWith(
                       color: context.colors.background,
                     ),
@@ -67,7 +76,7 @@ class CardWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'Michael John',
+                            cardHolder,
                             style: context.textTheme.bodyLarge!.copyWith(
                               color: context.colors.background,
                             ),
@@ -85,7 +94,7 @@ class CardWidget extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '03/29',
+                            '00/00',
                             style: context.textTheme.bodyLarge!.copyWith(
                               color: context.colors.background,
                             ),

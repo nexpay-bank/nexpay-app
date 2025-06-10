@@ -9,6 +9,7 @@ class DioService {
         baseUrl: dotenv.env['API_BASE_URL'] ?? '',
         connectTimeout: const Duration(seconds: 5),
         receiveTimeout: const Duration(seconds: 5),
+        validateStatus: (status) => status! < 500,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',

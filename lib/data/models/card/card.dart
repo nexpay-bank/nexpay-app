@@ -1,10 +1,11 @@
 import 'package:isar/isar.dart';
 
-part 'auth_token.g.dart';
+part 'card.g.dart';
 
 @collection
-class AuthToken {
+class Card {
   Id id = Isar.autoIncrement;
 
-  late String token;
+  late int accountId;
+  late double balance;
 }

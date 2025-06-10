@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:nexpay/core/routes/route_name.dart';
 import 'package:nexpay/core/themes/theme_extensions.dart';
 import 'package:nexpay/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:nexpay/features/auth/presentation/pages/login_page.dart';
@@ -23,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   late TextEditingController _usernameController;
   late bool _isChecked;
   late bool _obscureText;
+  late bool _first;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -33,6 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     _passwordController = TextEditingController();
     _usernameController = TextEditingController();
     _obscureText = true;
+    _first = false;
   }
 
   @override
@@ -47,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
     if (_formKey.currentState!.validate()) {
       final username = _usernameController.text;
       final password = _passwordController.text;
-
+      _first = false;
       try {
         context.read<AuthCubit>().register(
           username: username,

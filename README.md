@@ -3,13 +3,10 @@
 ## ScreenShots
 
 <img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/Slide%2016_9%20-%204.png?raw=true" width ="100%">
-<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image.png?raw=true" width ="50%">
-<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%207.png?raw=true" width ="50%">
-<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%206.png?raw=true" width ="50%">
-<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%205.png?raw=true" width ="100%">
 
+<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image.png?raw=true" width ="50%"><img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%207.png?raw=true" width ="50%">
 
-## Getting Started
+<img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%206.png?raw=true" width ="50%"><img src="https://github.com/nexpay-bank/nexpay-app/blob/main/assets/images/image%205.png?raw=true" width ="50%">
 
 This project is a starting point for a Flutter application.
 
